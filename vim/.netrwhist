@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/thilina/Desktop/Dominos/puppet/modules/servicebus'
+let g:netrw_dirhist_2='/home/thilina/Desktop/Dominos/puppet/modules/servicebus/manifests'
+let g:netrw_dirhist_3='/home/thilina/Desktop/Dominos/puppet/environments/dev/modules/registry'
+let g:netrw_dirhist_4='/home/thilina/Projects/wso2/secure_vault'
+let g:netrw_dirhist_5='/home/thilina/Projects/wso2/Apache-Stratos-Cli/apache-stratos-cli'
