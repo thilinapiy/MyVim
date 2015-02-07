@@ -132,7 +132,8 @@ autocmd BufWrite *.pp :call DeleteTrailingWS()
 autocmd BufWrite *.erb :call DeleteTrailingWS()
 
 " Toggle spell checking
-map <leader>sp :setlocal spell!<cr>
+" map <leader>sp :setlocal spell!<cr>
+set spell spelllang=en_us
 
 " Turn persistent undo on 
 try
