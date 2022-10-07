@@ -7,6 +7,14 @@ filetype indent on
 
 " Set to auto read when a file is changed from the outside
 set autoread
+set nocompatible
+
+call plug#begin()
+Plug 'sheerun/vim-polyglot'
+Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+call plug#end()
 
 
 " with a map leader it's possible to do extra key combinations
@@ -79,7 +87,9 @@ set visualbell
 " Enable syntax highlighting
 syntax enable
 
-colorscheme desert
+set termguicolors
+" colorscheme desert
+colorscheme habamax
 set background=dark
 
 " Set utf8 as standard encoding and en_US as the standard language
@@ -100,9 +110,10 @@ set expandtab
 set smarttab
 set smartindent
 
-" Set 1 tab == 4 spaces
-set tabstop=4
-set shiftwidth=4
+" Set 1 tab == 2 spaces
+set tabstop=2
+set shiftwidth=2
+set softtabstop=0
 
 " Treat long lines as break lines (useful when moving around in them)
 map j gj
@@ -133,7 +144,7 @@ autocmd BufWrite *.erb :call DeleteTrailingWS()
 
 " Toggle spell checking
 " map <leader>sp :setlocal spell!<cr>
-set spell spelllang=en_us
+set spelllang=en_us
 
 " Turn persistent undo on 
 try
@@ -150,3 +161,55 @@ endtry
 " inoremap $q ''<esc>i
 " inoremap $e ""<esc>i
 " inoremap $t <><esc>i
+
+" Color name (:help cterm-colors) or ANSI code
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+
+" Color name (:help gui-colors) or RGB color
+let g:limelight_conceal_guifg = 'DarkGray'
+let g:limelight_conceal_guifg = '#777777'
+
+" Default: 0.5
+let g:limelight_default_coefficient = 0.7
+
+" Number of preceding/following paragraphs to include (default: 0)
+" let g:limelight_paragraph_span = 1
+
+" Beginning/end of paragraph
+"   When there's no empty line between the paragraphs
+"   and each paragraph starts with indentation
+" let g:limelight_bop = '^\s'
+" let g:limelight_eop = '\ze\n^\s'
+
+" Highlighting priority (default: 10)
+"   Set it to -1 not to overrule hlsearch
+let g:limelight_priority = -1
+
+
+" Goyo enter and exit
+function! s:goyo_enter()
+  Limelight
+  let b:quitting = 0
+  let b:quitting_bang = 0
+  autocmd QuitPre <buffer> let b:quitting = 1
+  cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
+endfunction
+
+function! s:goyo_leave()
+  Limelight!
+  " Quit Vim if this is the only remaining buffer
+  if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+    if b:quitting_bang
+      qa!
+    else
+      qa
+    endif
+  endif
+endfunction
+
+autocmd! User GoyoEnter call <SID>goyo_enter()
+autocmd! User GoyoLeave call <SID>goyo_leave()
+
+" Width
+let g:goyo_width = 104
