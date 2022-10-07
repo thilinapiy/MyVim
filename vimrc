@@ -187,7 +187,8 @@ let g:limelight_default_coefficient = 0.7
 let g:limelight_priority = -1
 
 
-" Goyo enter and exit
+" Goyo 
+" enter and exit
 function! s:goyo_enter()
   Limelight
   let b:quitting = 0
@@ -212,4 +213,10 @@ autocmd! User GoyoEnter call <SID>goyo_enter()
 autocmd! User GoyoLeave call <SID>goyo_leave()
 
 " Width
-let g:goyo_width = 104
+let g:goyo_width = 120
+
+" GitGutter
+highlight link GitGutterChangeLine DiffText
+highlight GitGutterAdd    guifg=#009900 ctermfg=2
+highlight GitGutterChange guifg=#bbbb00 ctermfg=3
+highlight GitGutterDelete guifg=#ff2222 ctermfg=1
