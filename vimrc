@@ -37,6 +37,9 @@ set wildignore=*.o,*~,*.pyc
 " Always show current position
 set ruler
 
+" Set numbers
+set number
+
 " Highlight over length 
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
